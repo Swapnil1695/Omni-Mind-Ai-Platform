@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "OmniMind AI Assistant",
+  "version": "0.1.0",
+  "description": "AI-powered productivity assistant",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "notifications",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://calendar.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "OmniMind"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://calendar.google.com/*",
+        "https://meet.google.com/*"
+      ],
+      "js": ["src/content.js"],
+      "css": ["styles/content.css"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["assets/*"],
+    "matches": ["<all_urls>"]
+  }]
+}
